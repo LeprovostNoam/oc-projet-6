@@ -1,24 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import logements from '../datas/logements.json';
 import LogementCarousel from '../components/LogementCarousel';
 import star from '../assets/img/star.svg';
+import arrow from '../assets/img/chevron-up.svg'; 
 import '../assets/css/Logement.scss';
 
 const Logement = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [logement, setLogement] = useState(null);
+  const [expandedSection, setExpandedSection] = useState(null);
 
   useEffect(() => {
     const foundLogement = logements.find(logement => logement.id === id);
     if (foundLogement) {
       setLogement(foundLogement);
+    } else {
+      navigate('/404', { replace: true });
     }
-  }, [id]);
+  }, [id, navigate]);
 
   if (!logement) {
-    return <div>Logement non trouvé</div>;
+    return null; 
   }
 
   const [firstName, lastName] = logement.host.name.split(' ');
@@ -36,6 +41,10 @@ const Logement = () => {
       );
     }
     return stars;
+  };
+
+  const toggleSection = (section) => {
+    setExpandedSection(expandedSection === section ? null : section);
   };
 
   return (
@@ -64,6 +73,38 @@ const Logement = () => {
             </div>
             <div className="logement-rating">
               {renderStars(logement.rating)}
+            </div>
+          </div>
+          <div className="logement-more">
+            <div className="logement-expandable">
+              <div className="expandable-header" onClick={() => toggleSection('description')}>
+                <h2>Description</h2>
+                <img
+                  src={arrow}
+                  alt="Toggle"
+                  className={expandedSection === 'description' ? 'rotate' : ''}
+                />
+              </div>
+              <div className={`expandable-content ${expandedSection === 'description' ? 'expand' : ''}`}>
+                <p>{logement.description}</p>
+              </div>
+            </div>
+            <div className="logement-expandable">
+              <div className="expandable-header" onClick={() => toggleSection('equipements')}>
+                <h2>Équipements</h2>
+                <img
+                  src={arrow}
+                  alt="Toggle"
+                  className={expandedSection === 'equipements' ? 'rotate' : ''}
+                />
+              </div>
+              <div className={`expandable-content ${expandedSection === 'equipements' ? 'expand' : ''}`}>
+                <ul>
+                  {logement.equipments.map((equipment, index) => (
+                    <li key={index}>{equipment}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
