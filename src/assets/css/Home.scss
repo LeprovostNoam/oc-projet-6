@@ -1,0 +1,12 @@
+.cards-container {
+    display: grid;
+    gap: 20px;
+    padding: 40px;
+    margin: 40px;
+    border-radius: 10px;
+    background: #F6F6F6;
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  

@@ -1,15 +1,16 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
-import Header from '../components/Header';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 function NotFound() {
   return (
-    <div>
-      <Helmet>
-      <title>Kasa FR | 404</title>
-      </Helmet>
-      <h1>404 Nout Found</h1>
-    </div>
+    <HelmetProvider>
+      <div>
+        <Helmet>
+          <title>Kasa FR | 404</title>
+        </Helmet>
+        <h1>404 Not Found</h1>
+      </div>
+    </HelmetProvider>
   );
 }
 
