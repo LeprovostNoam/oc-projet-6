@@ -60,10 +60,6 @@ const Logement = () => {
               <h1>{logement.title}</h1>
               <p>{logement.location}</p>
             </div>
-            <div className="logement-host">
-              <p>{firstName}<br />{lastName}</p>
-              <img src={logement.host.picture} alt={logement.host.name} />
-            </div>
           </div>
           <div className="logement-extra">
             <div className="logement-tags">
@@ -73,6 +69,10 @@ const Logement = () => {
             </div>
             <div className="logement-rating">
               {renderStars(logement.rating)}
+            </div>
+            <div className="logement-host">
+              <p>{firstName}<br />{lastName}</p>
+              <img src={logement.host.picture} alt={logement.host.name} />
             </div>
           </div>
           <div className="logement-more">
