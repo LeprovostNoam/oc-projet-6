@@ -51,7 +51,7 @@ const Logement = () => {
     <HelmetProvider>
       <div>
         <Helmet>
-          <title>Kasa FR | Logement {logement.title}</title>
+          <title>Kasa FR | {logement.title}</title>
         </Helmet>
         <LogementCarousel pictures={logement.pictures} />
         <div className="logement-details">
