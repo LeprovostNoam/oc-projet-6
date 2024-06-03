@@ -30,9 +30,6 @@
       font-weight: bold;
       margin: 0;
     }
-    .break-mobile {
-        display: none;
-    }
   }
   
   @media (min-width: 768px) {
@@ -43,9 +40,6 @@
   
   @media (max-width: 767px) {
     .banner {
-        .break-mobile {
-            display: inline;
-        }
         height: 111px;
     }
     .banner h1 {

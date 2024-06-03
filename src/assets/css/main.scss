@@ -3,3 +3,23 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.container {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+}
+
+.break-mobile {
+    display: none;
+}
+  
+@media (max-width: 767px) {
+    .break-mobile {
+        display: inline;
+    }
+}
