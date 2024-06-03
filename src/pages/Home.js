@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import Header from '../components/Header';
+import Banner from '../components/Banner';
 
 function Home() {
   return (
@@ -8,7 +8,7 @@ function Home() {
       <Helmet>
       <title>Kasa FR | Chez vous, partout et ailleurs</title>
       </Helmet>
-      <h1>Hello World</h1>
+      <Banner />
     </div>
   );
 }
