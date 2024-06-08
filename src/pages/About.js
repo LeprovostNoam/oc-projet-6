@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Banner from '../components/Banner';
+import Section from '../components/Section';
 import bannerImage from '../assets/img/banner2-min.webp';
-import chevronUp from '../assets/img/chevron-up.svg';
-
 import '../assets/css/About.scss';
 
 const About = () => {
@@ -31,7 +30,6 @@ const About = () => {
       content: 'La sécurité est la priorité de Kasa. Aussi bien pour nos hôtes que pour les voyageurs, chaque logement correspond aux critères de sécurité établis par nos services. En laissant une note aussi bien à l\'hôte qu\'au locataire, cela permet à nos équipes de vérifier que les standards sont bien respectés. Nous organisons également des ateliers sur la sécurité domestique pour nos hôtes.',
     },
   ];
-  
 
   return (
     <HelmetProvider>
@@ -42,19 +40,14 @@ const About = () => {
         <Banner image={bannerImage} />
         <div className="about-sections">
           {sections.map((section, index) => (
-            <div key={index} className="about-section">
-              <div className="section-header" onClick={() => toggleSection(index)}>
-                <h2>{section.title}</h2>
-                <img
-                  src={chevronUp}
-                  alt="Toggle section"
-                  className={`chevron-icon ${openSection === index ? 'rotate' : ''}`}
-                />
-              </div>
-              <div className={`section-content ${openSection === index ? 'expand' : ''}`}>
-                {section.content}
-              </div>
-            </div>
+            <Section
+              key={index}
+              index={index}
+              title={section.title}
+              content={section.content}
+              openSection={openSection}
+              toggleSection={toggleSection}
+            />
           ))}
         </div>
       </div>
