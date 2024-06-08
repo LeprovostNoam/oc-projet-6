@@ -3,8 +3,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import logements from '../datas/logements.json';
 import LogementCarousel from '../components/LogementCarousel';
-import star from '../assets/img/star.svg';
-import arrow from '../assets/img/chevron-up.svg'; 
+import LogementHeader from '../components/LogementHeader';
+import LogementTags from '../components/LogementTags';
+import LogementRating from '../components/LogementRating';
+import LogementHost from '../components/LogementHost';
+import LogementExpandableSection from '../components/LogementExpandableSection';
 import '../assets/css/Logement.scss';
 
 const Logement = () => {
@@ -26,23 +29,6 @@ const Logement = () => {
     return null; 
   }
 
-  const [firstName, lastName] = logement.host.name.split(' ');
-
-  const renderStars = (rating) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      stars.push(
-        <img
-          key={i}
-          src={star}
-          alt={`${i} étoile`}
-          className={i <= rating ? 'star-filled' : 'star-empty'}
-        />
-      );
-    }
-    return stars;
-  };
-
   const toggleSection = (section) => {
     setExpandedSection(expandedSection === section ? null : section);
   };
@@ -55,57 +41,25 @@ const Logement = () => {
         </Helmet>
         <LogementCarousel pictures={logement.pictures} />
         <div className="logement-details">
-          <div className="logement-header">
-            <div className="logement-title">
-              <h1>{logement.title}</h1>
-              <p>{logement.location}</p>
-            </div>
-          </div>
-          <div className="logement-extra">
-            <div className="logement-tags">
-              {logement.tags.map((tag, index) => (
-                <span key={index} className="tag">{tag}</span>
-              ))}
-            </div>
-            <div className="logement-rating">
-              {renderStars(logement.rating)}
-            </div>
-            <div className="logement-host">
-              <p>{firstName}<br />{lastName}</p>
-              <img src={logement.host.picture} alt={logement.host.name} />
-            </div>
-          </div>
+          <LogementHeader title={logement.title} location={logement.location} />
+          <LogementTags tags={logement.tags} />
+          <LogementRating rating={logement.rating} />
+          <LogementHost name={logement.host.name} picture={logement.host.picture} />
           <div className="logement-more">
-            <div className="logement-expandable">
-              <div className="expandable-header" onClick={() => toggleSection('description')}>
-                <h2>Description</h2>
-                <img
-                  src={arrow}
-                  alt="Toggle"
-                  className={expandedSection === 'description' ? 'rotate' : ''}
-                />
-              </div>
-              <div className={`expandable-content ${expandedSection === 'description' ? 'expand' : ''}`}>
-                <p>{logement.description}</p>
-              </div>
-            </div>
-            <div className="logement-expandable">
-              <div className="expandable-header" onClick={() => toggleSection('equipements')}>
-                <h2>Équipements</h2>
-                <img
-                  src={arrow}
-                  alt="Toggle"
-                  className={expandedSection === 'equipements' ? 'rotate' : ''}
-                />
-              </div>
-              <div className={`expandable-content ${expandedSection === 'equipements' ? 'expand' : ''}`}>
-                <ul>
-                  {logement.equipments.map((equipment, index) => (
-                    <li key={index}>{equipment}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <LogementExpandableSection
+              section="description"
+              title="Description"
+              content={<p>{logement.description}</p>}
+              expandedSection={expandedSection}
+              toggleSection={toggleSection}
+            />
+            <LogementExpandableSection
+              section="equipements"
+              title="Équipements"
+              content={<ul>{logement.equipments.map((equipment, index) => <li key={index}>{equipment}</li>)}</ul>}
+              expandedSection={expandedSection}
+              toggleSection={toggleSection}
+            />
           </div>
         </div>
       </div>
