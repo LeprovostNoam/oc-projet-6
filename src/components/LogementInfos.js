@@ -4,11 +4,9 @@ import star from '../assets/img/star.svg';
 
 
 const LogementHeader = ({ logement }) => {
-  // Destructure logement object to get necessary properties
   const { title, location, host, tags, rating } = logement;
   const [firstName, lastName] = host.name.split(' ');
 
-  // Function to render stars (dummy implementation, replace with actual logic)
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
       <img
