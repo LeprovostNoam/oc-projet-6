@@ -236,10 +236,64 @@ li {
 	}
 
 	.logement-host {
-		margin-top: -70px;
-        padding-bottom: 20px;
 		order: 1;
 		width: 100%;
 		justify-content: flex-end;
+	}
+}
+
+/* maj */
+
+.logement-infos {
+	display: flex;
+	align-items: center; 
+  }
+  
+.logement-tags {
+	display: flex;
+	gap: 10px;
+	flex-grow: 1;
+	flex-wrap: wrap;
+}
+
+.logement-tags span {
+	display: inline-block; 
+	max-width: 100%; 
+}
+
+.logement-rating {
+	width: 30%;
+	margin-left: auto;
+	display: flex;
+	align-items: center; 
+}
+.logement-header2, .logement-infos2 {
+	display: none;
+}
+
+@media (max-width: 768px) {
+	.logement-header2, .logement-infos2 {
+		display: block;
+	}
+	.logement-header, .logement-infos {
+		display: none;
+	}
+	.logement-infos2{
+		display: flex;
+		flex-wrap: nowrap;
+		flex-direction: row-reverse
+	}
+	.logement-infos {
+		flex-direction: column; /* Empile les éléments verticalement sur mobile */
+		align-items: flex-start; /* Aligne les éléments à gauche */
+	}
+
+	.logement-tags {
+		width: 100%; /* Prend toute la largeur disponible sur mobile */
+		margin-bottom: 10px; /* Espace sous les tags */
+	}
+
+	.logement-rating {
+		margin-top: 1em
 	}
 }

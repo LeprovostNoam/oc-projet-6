@@ -19,7 +19,7 @@ function Home() {
         <Helmet>
           <title>Kasa FR | Chez vous, partout et ailleurs</title>
         </Helmet>
-        <Banner text='Chez vous,<span className="break-mobile"><br/></span> partout et ailleurs' image={backgroundImage} />
+        <Banner text='Chez vous,<span class="break-mobile"><br/></span> partout et ailleurs' image={backgroundImage} />
         <section className="cards-container">
           {data.map((logement) => (
             <Card key={logement.id} id={logement.id} title={logement.title} cover={logement.cover} />

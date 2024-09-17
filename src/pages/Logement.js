@@ -3,12 +3,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import logements from '../datas/logements.json';
 import LogementCarousel from '../components/LogementCarousel';
-import LogementHeader from '../components/LogementHeader';
-import LogementTags from '../components/LogementTags';
-import LogementRating from '../components/LogementRating';
-import LogementHost from '../components/LogementHost';
+import LogementInfos from '../components/LogementInfos';
 import LogementExpandableSection from '../components/LogementExpandableSection';
 import '../assets/css/Logement.scss';
+
+import star from '../assets/img/star.svg';
 
 const Logement = () => {
   const { id } = useParams();
@@ -17,7 +16,7 @@ const Logement = () => {
   const [expandedSection, setExpandedSection] = useState(null);
 
   useEffect(() => {
-    const foundLogement = logements.find(logement => logement.id === id);
+    const foundLogement = logements.find((logement) => logement.id === id);
     if (foundLogement) {
       setLogement(foundLogement);
     } else {
@@ -26,25 +25,34 @@ const Logement = () => {
   }, [id, navigate]);
 
   if (!logement) {
-    return null; 
+    return null;
   }
 
   const toggleSection = (section) => {
     setExpandedSection(expandedSection === section ? null : section);
   };
 
+  const renderStars = (rating) => {
+    return Array.from({ length: 5 }, (_, i) => (
+      <img
+        key={i}
+        src={star}
+        alt={`${i + 1} étoile`}
+        className={i < rating ? 'star-filled' : 'star-empty'}
+      />
+    ));
+  };
+  const [firstName, lastName] = logement.host.name.split(' ');
+
   return (
     <HelmetProvider>
-      <div>
+      <div className="logement-container">
         <Helmet>
           <title>Kasa FR | {logement.title}</title>
         </Helmet>
         <LogementCarousel pictures={logement.pictures} />
         <div className="logement-details">
-          <LogementHeader title={logement.title} location={logement.location} />
-          <LogementTags tags={logement.tags} />
-          <LogementRating rating={logement.rating} />
-          <LogementHost name={logement.host.name} picture={logement.host.picture} />
+        <LogementInfos logement={logement} />
           <div className="logement-more">
             <LogementExpandableSection
               section="description"
