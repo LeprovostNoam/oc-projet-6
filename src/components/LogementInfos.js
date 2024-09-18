@@ -43,15 +43,14 @@ const LogementHeader = ({ logement }) => {
               ))}
             </div>
         </div>
-        <div class="logement-infos2">
-            
+        <div className="logement-infos2">
             <div className="logement-host">
               <p>{firstName}<br/>{lastName}</p>
               <img src={logement.host.picture} alt={logement.host.name} className="host-picture" />
             </div>
             <div className="logement-rating">{renderStars(logement.rating)}</div>
         </div>
-        <div class="logement-infos">
+        <div className="logement-infos">
             <div className="logement-tags">
             {logement.tags.map((tag, index) => (
                 <span key={index} className="tag">

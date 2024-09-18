@@ -42,7 +42,7 @@
 	  img {
 		width: 100%; 
 		height: 100%;
-		filter: brightness(0) invert(1);
+		filter: brightness(0) invert(1); /* Rend l'image blanche */
 	  }
 	}
   
@@ -59,3 +59,8 @@
 	}
   }
   
+  @media only screen and (max-width: 768px) {
+	.logement-carousel {
+		width: 95%;
+	}
+}
